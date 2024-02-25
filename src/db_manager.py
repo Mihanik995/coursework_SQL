@@ -148,6 +148,11 @@ class DBManager:
 
     @db_working
     def get_vacancies_with_keyword(self, keyword, cur):
+        """
+        возвращает вакансии данного работодателя, содержащие заданное
+        ключевое слово
+        """
         cur.execute(f"""SELECT * FROM vacancies
-                    WHERE vacancy_name LIKE '%{keyword}%'""")
+                    WHERE vacancy_name LIKE '%{keyword}%'
+                    AND employer_id={self.id}""")
         return cur.fetchall()
